@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://apptraitsolutions.com/wp-content/uploads/2021/01/C88IZyEo7g-1.jpg" type="image/x-icon">
+    <title>Quiz-App</title>
+    <style>
+        .hit {
+            border: 2px solid black;
+            display: flex;
+            height: 4rem;
+            flex-wrap: wrap;
+            width: calc(100% - 2rem); 
+            max-width: 66rem; 
+            margin: 0 auto; 
+            padding-top: 2rem;
+            font-size: 30px;
+            justify-content: center;
+            background: linear-gradient(red, grey);
+            text-align: center; 
+        }
+        
+        .hit-1 {
+            position:absolute;
+            color: #0c0c0c;
+            font-size: 1.5rem;
+            margin-left: 15rem;
+            bottom: 5rem;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .hit-2 {
+            position: absolute;
+            color: #070707;
+            font-size: 1.5rem;
+            margin-left: 3rem; 
+            bottom: 7rem;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        body{position: absolute ;}
+        .but{
+            position: absolute;
+            height: 2rem;
+            width: 5rem;
+            margin-left: 56rem;
+            color: #60a5ff;
+            cursor: pointer;
+            bottom: 1rem;
+        }
+        
+        @media screen and (min-width: 576px) {
+            .hit {
+                max-width: none; 
+            }
+            
+            .hit-1,
+            .hit-2 {
+                position: relative; 
+                margin-left: 0; 
+                width: auto;
+                bottom: auto; 
+            }
+            body{
+                position: relative;
+            }        
+        }
+    </style>    
+</head>
+<body>
+    <h2 class="hit">Test Yourself</h2>
+    <p class="hit-1">Questions:  <span id="questionCount">0</span></p>
+    <p class="hit-2" id="qwer">Score: </p>
+    <div id="quiz">
+    <p class="que">Q-1: What is the sum of 2+3..?</p>
+    <input type="radio" name="q1"  id="Q1" value="a"> 3
+    <input type="radio" name="q1" id="Q1" value="b"> 5
+    <input type="radio" name="q1" id="Q1" value="c"> 2
+    <input type="radio" name="q1" id="Q1" value="d"> 9    
+    <p class="que-2">Q-2: What is the product of 4 * 7..?</p>
+    <input type="radio" name="q2" id="Q2" value="a"> 32
+    <input type="radio" name="q2" id="Q2" value="b"> 53
+    <input type="radio" name="q2" id="Q2" value="c"> 28       
+    <input type="radio" name="q2" id="Q2" value="d"> 91
+    <p class="que-3">Q-3: What is the product of 3 * 7..?</p>
+    <input type="radio" name="q3" id="Q3" value="a"> 34
+    <input type="radio" name="q3" id="Q3" value="b"> 53
+    <input type="radio" name="q3" id="Q3" value="c"> 21
+    <input type="radio" name="q3" id="Q3" value="d"> 92
+    <p class="que-4">Q-4: What is the product of 3 * 7..?</p>
+    <input type="radio" name="q4" id="Q4" value="a"> 33
+    <input type="radio" name="q4" id="Q4" value="b"> 52
+    <input type="radio" name="q4" id="Q4" value="c"> 21
+    <input type="radio" name="q4" id="Q4" value="d"> 94
+    <p class="que-5">Q-5: What is the product of 7 * 7..?</p>
+    <input type="radio" name="q5" id="Q5" value="a"> 33
+    <input type="radio" name="q5" id="Q5" value="b"> 54
+    <input type="radio" name="q5" id="Q5" value="c"> 25
+    <input type="radio" name="q5" id="Q5" value="d"> 49
+    </div>
+    <button type="button" onclick="Submit()" class="but">Submit</button>
+
+    <script>
+        function Submit(){
+            let answers = {
+                q1: 'b',
+                q2: 'c',
+                q3:'c',  
+                q4:'c',
+                q5:'d'};
+            let score = 0;
+            for (let i = 1; i <= Object.keys(answers).length; i++){
+                const answer = document.querySelectorAll(`input[name=q${i}]:checked`);
+                if (answer.length > 0 && answer[0].value === answers[`q${i}`]) {
+                score += 1;
+            }
+            else if (answer && answer.value !== answers[`q${i}`]) {
+                alert('Please select the correct options for all questions.');
+                return;
+            } else {
+                alert('Please answer all questions.');
+                return;
+            }
+        }    
+        let displayScore = document.getElementById('qwer');
+    displayScore.textContent = `Score: ${score}`;
+    
+    if (score !== Object.keys(answers).length) {
+    alert('Please select an option for each question.');
+                return;
+            }    
+        if(q1= 'b',
+        q2= 'c',
+        q3='c',  
+        q4='c',
+        q5='d') {
+            alert('Please select correct options')};
+            }
+        const inputs = document.querySelectorAll('input[type=radio]');
+        inputs.forEach(input => {
+            input.addEventListener('change', updateQuestion);
+        });
+
+        function updateQuestion() {
+            let selectedCount = 0;
+            let questionCount = 0;
+
+            inputs.forEach(input => {
+                if (input.checked) {
+                    selectedCount++;
+                    if (!questionCount || input.name !== inputs[questionCount - 1].name) {
+                        questionCount++;
+                    }
+                }
+            });
+
+            let questionCounter = document.getElementById('questionCount');
+            questionCounter.textContent = `${selectedCount}/${questionCount}`;
+        }
+      </script>
+</body>
+</html>
